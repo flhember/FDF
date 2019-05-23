@@ -6,13 +6,13 @@
 #    By: flhember <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/11 15:51:59 by flhember          #+#    #+#              #
-#    Updated: 2019/05/09 12:46:32 by flhember         ###   ########.fr        #
+#    Updated: 2019/05/23 14:44:41 by flhember         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
 CC = clang
-FLAGS = -fsanitize=address -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror
 
 SRC_PATH = ./srcs/
 OBJ_PATH = ./obj/
@@ -25,6 +25,11 @@ FRAMEWORK = -lmlx -framework OpenGL -framework Appkit
 SRC_FILES = main.c			\
 			ft_free.c		\
 			ft_parcing.c	\
+			ft_hook.c		\
+			bresenham.c		\
+			ft_convpts.c	\
+			ft_print_img.c	\
+			ft_close.c		\
 			ft_fdf.c
 
 INC_FILES = fdf.h

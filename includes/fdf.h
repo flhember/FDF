@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 15:55:59 by flhember          #+#    #+#             */
-/*   Updated: 2019/05/10 16:16:05 by flhember         ###   ########.fr       */
+/*   Updated: 2019/05/23 16:42:51 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,25 +18,25 @@
 # include <math.h>
 # include <mlx.h>
 
-# include <stdio.h>
-
-# define BLACK 	0x000000
-# define WHITE 	0xFFFFFF
-# define RED 	0xFF0000
-# define ORANGE 0xFFA500
-# define LIME 	0x00FF00
-# define BLUE 	0x0000FF
-# define YELLOW 0xFFFF00
-# define CYAN 	0x00FFFF
-# define MAGENTA 0xFF00FF
-# define SILVER 0xC0C0C0
-# define GRAY 	0x808080
-# define MAROON 0x800000
-# define OLIVE 	0x808000
-# define GREEN 	0x008000
-# define PURPLE 0x800080
-# define TEAL 	0x008080
-# define NAVY 	0x000080
+# define P 		35
+# define I 		34
+# define ARW_UP 126
+# define ARW_DN	125
+# define W 		13
+# define S 		1
+# define M		46
+# define ARW_LT	123
+# define ARW_RT	124
+# define PLUS	69
+# define MINUS	78
+# define ESC	53
+# define PTS	47
+# define SLASH	44
+# define ROT_X	7
+# define ROT_Y	16
+# define ROT_Z	6
+# define PLUS2	24
+# define MINUS2	27
 
 typedef struct		s_map
 {
@@ -55,14 +55,13 @@ typedef struct		s_pts
 	int				y2;
 	int				dy;
 	int				dx;
-	int				Dx;
-	int				Dy;
-	int				errx;
-	int				erry;
+	int				z1;
+	int				z2;
+	int				colorz1;
+	int				colorz2;
 	int				xincr;
 	int				yincr;
 }					t_pts;
-
 
 typedef	struct		s_env
 {
@@ -70,16 +69,36 @@ typedef	struct		s_env
 	void			*win_ptr;
 	void			*img_ptr;
 	unsigned char	*img_str;
-	int				decal;
-	int				bpp;
-	int				s_l;
 	int				endian;
+	int				s_l;
+	int				bpp;
+	int				fd;
+	int				margex;
+	int				margey;
+	int				sense_rot;
+	float			incr_angl;
+	float			value_aglx;
+	float			value_agly;
+	float			value_aglz;
+	int				dot;
+	int				pad;
+	int				iso;
+	int				zincr;
 	struct s_pts	pts;
 	struct s_map	map;
 }					t_env;
 
-int			ft_parcing(t_env **data, char *file);
-void		ft_free(t_env **data, int flag);
-int			ft_fdf(t_env **data, char *file);
+int					ft_close(t_env **data);
+int					ft_fdf(t_env **data, char *file);
+int					ft_key_press(int key, t_env **data);
+int					ft_parcing(t_env **data, char *file);
+void				ft_menu(t_env **data);
+void				ft_print_img(t_env **data);
+void				ft_define_marge(t_env **data);
+void				ft_print_control(t_env **data);
+void				ft_free(t_env **data, int flag);
+void				ft_rotation_x_y_z(t_env **data);
+void				iso(t_env **data, int z1, int z2);
+void				ft_bresenham(t_env **data, int z1, int z2, int i);
 
 #endif

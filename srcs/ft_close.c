@@ -1,32 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free.c                                          :+:      :+:    :+:   */
+/*   ft_close.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/08 14:40:05 by flhember          #+#    #+#             */
-/*   Updated: 2019/05/23 14:41:10 by flhember         ###   ########.fr       */
+/*   Created: 2019/05/22 20:14:20 by flhember          #+#    #+#             */
+/*   Updated: 2019/05/23 16:40:31 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-void	ft_free(t_env **data, int flag)
+int		ft_close(t_env **data)
 {
-	int		i;
-
-	i = 0;
-	if ((*data)->map.tab)
-	{
-		while (i < (*data)->map.size_col)
-		{
-			if ((*data)->map.tab[i])
-				free((*data)->map.tab[i]);
-			i++;
-		}
-		free((*data)->map.tab);
-	}
-	if (flag)
-		free(*data);
+	mlx_destroy_image((*data)->mlx_ptr, (*data)->img_ptr);
+	mlx_clear_window((*data)->mlx_ptr, (*data)->win_ptr);
+	ft_free(data, 1);
+	exit(0);
+	return (0);
 }
